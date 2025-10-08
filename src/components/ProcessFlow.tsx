@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const steps = [
   {
@@ -29,16 +30,58 @@ const steps = [
   },
 ];
 
+const ProcessStep = ({ item, index, isLast }: { item: typeof steps[0]; index: number; isLast: boolean }) => {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+      }`}
+      style={{ transitionDelay: `${index * 0.1}s` }}
+    >
+      <Card className="p-6 bg-gradient-card border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-2xl font-bold shadow-glow text-primary-foreground group-hover:scale-110 transition-transform duration-300">
+            {item.step}
+          </div>
+          
+          <div className="flex-1">
+            <h3 className="text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
+              {item.title}
+            </h3>
+            <p className="text-muted-foreground">
+              {item.description}
+            </p>
+          </div>
+
+          {!isLast && (
+            <ArrowRight className="hidden sm:block w-6 h-6 text-primary/50 group-hover:text-primary group-hover:translate-x-1 transition-all" />
+          )}
+        </div>
+      </Card>
+    </div>
+  );
+};
+
 const ProcessFlow = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 animate-fade-in">
+        <div
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-700 ${
+            headerVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
+        >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary-glow to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
               How It Works
             </span>
           </h2>
@@ -49,28 +92,12 @@ const ProcessFlow = () => {
 
         <div className="max-w-5xl mx-auto space-y-6">
           {steps.map((item, index) => (
-            <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-glow group">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-2xl font-bold shadow-glow">
-                    {item.step}
-                  </div>
-                  
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-semibold mb-2 text-foreground group-hover:text-primary-glow transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  {index < steps.length - 1 && (
-                    <ArrowRight className="hidden sm:block w-6 h-6 text-primary/50 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  )}
-                </div>
-              </Card>
-            </div>
+            <ProcessStep 
+              key={index} 
+              item={item} 
+              index={index} 
+              isLast={index === steps.length - 1}
+            />
           ))}
         </div>
       </div>
