@@ -2,9 +2,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 
-const Hero = () => {
+interface HeroProps {
+  id?: string;
+}
+
+const Hero = ({ id }: HeroProps) => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id={id} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated video-like gradient background */}
       <div className="absolute inset-0 bg-gradient-hero">
         {/* Animated gradient overlay */}

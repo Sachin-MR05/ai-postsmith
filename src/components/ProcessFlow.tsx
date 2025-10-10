@@ -65,11 +65,15 @@ const ProcessStep = ({ item, index, isLast }: { item: typeof steps[0]; index: nu
   );
 };
 
-const ProcessFlow = () => {
+interface ProcessFlowProps {
+  id?: string;
+}
+
+const ProcessFlow = ({ id }: ProcessFlowProps) => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id={id} className="py-24 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
       

@@ -11,12 +11,16 @@ const technologies = [
   "JSON",
 ];
 
-const TechStack = () => {
+interface TechStackProps {
+  id?: string;
+}
+
+const TechStack = ({ id }: TechStackProps) => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: badgesRef, isVisible: badgesVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-muted/30">
+    <section id={id} className="py-24 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={headerRef}

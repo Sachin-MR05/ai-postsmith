@@ -1,6 +1,7 @@
-# TODO List for Fixing Background Video Overlap
+# TODO List for Adding Animated Navbar
 
-- [x] Add z-0 class to the background div in src/components/Hero.tsx to ensure it stays below the content
-- [x] Change the content div to absolute positioning with z-10 to ensure it overlays the background properly
-- [x] Add semi-transparent background to the content div to ensure text visibility against the animated background
-- [ ] Test the change by running the development server and checking if the content remains visible above the background
+- [x] Add id attributes to each section in src/pages/Index.tsx for smooth scrolling
+- [x] Create src/components/Navbar.tsx with fixed navbar, logo, menu items, mobile hamburger, and slide-down animation
+- [x] Integrate Navbar component into src/pages/Index.tsx above Hero section
+- [ ] Run npm run dev to test navbar functionality and animations
+- [ ] Verify smooth scrolling and mobile responsiveness

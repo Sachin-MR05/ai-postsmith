@@ -3,11 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const Outcome = () => {
+interface OutcomeProps {
+  id?: string;
+}
+
+const Outcome = ({ id }: OutcomeProps) => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 relative">
+    <section id={id} className="py-24 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-background to-primary/5"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

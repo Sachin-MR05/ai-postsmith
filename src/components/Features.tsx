@@ -57,11 +57,15 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
   );
 };
 
-const Features = () => {
+interface FeaturesProps {
+  id?: string;
+}
+
+const Features = ({ id }: FeaturesProps) => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 relative">
+    <section id={id} className="py-24 relative">
       <div
         ref={headerRef}
         className={`text-center mb-16 transition-all duration-700 ${

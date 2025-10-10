@@ -53,11 +53,15 @@ const ChallengeCard = ({ item, index }: { item: typeof challenges[0]; index: num
   );
 };
 
-const Challenges = () => {
+interface ChallengesProps {
+  id?: string;
+}
+
+const Challenges = ({ id }: ChallengesProps) => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-muted/30 to-background">
+    <section id={id} className="py-24 bg-gradient-to-b from-muted/30 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={headerRef}
